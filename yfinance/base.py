@@ -147,8 +147,10 @@ class TickerBase():
             proxy = {"https": proxy}
 
         # Getting data from json
-        url = "{}/v8/finance/chart/{}".format(self._base_url, self.ticker)
-        data = _requests.get(url=url, params=params, proxies=proxy)
+#         url = "{}/v8/finance/chart/{}".format(self._base_url, self.ticker)
+        url = "{}/{}/financials".format(self._scrape_url, self.ticker)
+        data = utils.get_json(url, proxy)
+#         data = _requests.get(url=url, params=params, proxies=proxy)
         if "Will be right back" in data.text:
             raise RuntimeError("*** YAHOO! FINANCE IS CURRENTLY DOWN! ***\n"
                                "Our engineers are working quickly to resolve "
